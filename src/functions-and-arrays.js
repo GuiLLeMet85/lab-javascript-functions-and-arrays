@@ -161,15 +161,16 @@ We are following a similar logic to the one applied on the bonus iteration 4.1. 
 
 const mixedArr = [6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10];
 
-function avg (arr) {
-
-if (!arr.length) return null; 
-  
-let averageValue = (sum(arr) / arr.length )
-  
-  return numbers (averageValue);
-
-
+function avg(arr) {
+  return arr.map(item => {
+    if (typeof item === 'number') {
+        return item;
+    } else if(typeof item === 'boolean') {
+        return Number(item);
+    } else if (typeof item === 'string'){
+        return item.length
+    }
+  }).reduce((prev, current) => prev + current) / arr.length;
 }
 
 
