@@ -1,43 +1,191 @@
 // Iteration #1: Find the maximum
-function maxOfTwoNumbers() {}
+
+//Option 1
+
+function maxOfTwoNumbers(num1, num2) {
+    return Math.max(num1, num2);
+}
+
+console.log(maxOfTwoNumbers(9,15));
+
+
+//Option 2
+
+function maxOfTwoNumbers(num1,num2) {
+    if (num1 > num2) {
+      return num1;
+    }
+    else {
+      return num2;
+    }
+}
+
+console.log(maxOfTwoNumbers(9,15));
 
 
 
 // Iteration #2: Find longest word
 const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard', 'crackpot'];
 
-function findLongestWord() {}
+function findLongestString(arr) {
+  return arr.sort(function(a, b) {return b.length - a.length})[0];
+}
+console.log(findLongestString(words))
+
 
 
 
 // Iteration #3: Calculate the sum
 const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
-function sumNumbers() {}
+function sumNumbers(arr) {
+  
+  return arr.reduce(function(a, b){ return a + b; });
+  
+}
+console.log(sumNumbers(numbers))
+
 
 
 
 // Iteration #3.1 Bonus:
-function sum() {}
+/*#### Bonus - Iteration #3.1: A generic `sum()` function
+
+**The goal: Learn how to refactor your code.** :muscle:
+
+In the iteration 3, you created a function that returns the sum of an array of numbers. 
+But what if we wanted to know how much is the sum of the length of all of the words in an 
+array? What if we wanted to add _boolean_ values to the mix? We wouldn't be able to use the 
+same function as above, or better saying, we would have to _tweak_ it a little bit so that 
+it can be reused no matter what is in the array that is passed as argument when 
+function `sumNumbers()` is called.
+
+Here we are applying a concept we call **polymorphism**, that is, dealing with a functions' 
+input independently of the types they are passed as.
+
+Let's implement the function `sum()` that calculates the sum for array filled with (_almost_) 
+any type of data. Note that strings should have their length added to the total, and boolean 
+values should be coerced into their corresponding numeric values. Check the tests for more 
+details.
+
+You can use the following array to test your solution:
+
+```javascript
+const mixedArr = [6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10];
+
+// should return: 57
+
+*/
+const mixedArr = [6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10];
+
+function sum(numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    if (typeof numbers[i] === "number") {
+      sum += numbers[i];
+    } else if (typeof numbers[i] === "string") {
+      sum += numbers[i].length;
+    } else if (numbers[i] === true) {
+      sum += 1;
+    }
+  }
+    return sum
+} 
+
+console.log(sum(mixedArr));
+
 
 
 
 // Iteration #4: Calculate the average
+
 // Level 1: Array of numbers
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
 
-function averageNumbers() {}
+// Option 1 - With decimals
+function averageNumbers() {
+
+  let suma =  numbers.reduce((a, b) => a + b, 0)
+
+  return suma/arr.length;
+}
+
+console.log(averageNumbers(numbersAvg))
+
+
+// Option 2 - Without decimals
+
+function averageNumbers(arr) {
+
+  let sum =  numbers.reduce((a, b) => a + b, 0)
+  let avgWithDecimal = sum/arr.length;
+   
+   return avgWithDecimal.toFixed(0);
+ }
+ 
+ console.log(averageNumbers(numbersAvg))
+
+
 
 
 // Level 2: Array of strings
+/*Implement the function named `averageWordLength` that receives as a single argument 
+an array of words and returns the average length of the words:
+
+You can use the following array to test your solution: */
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
 
-function averageWordLength() { }
+function averageWordLength(arr) { 
+
+  let sum = 0;
+  if (!arr.length) return null;
+
+  for (let i=0; i < wordsArr.length; i++) {
+    sum += wordsArr[i].length;
+  }
+  
+return sum / wordsArr.length
+  
+}
+
+console.log(averageWordLength(wordsArr))
+
 
 // Bonus - Iteration #4.1
-function avg() {}
+
+/* 
+Create function `avg(arr)` that receives any mixed array and calculates average. 
+Consider as mixed array an array filled with numbers and/or strings and/or booleans. 
+We are following a similar logic to the one applied on the bonus iteration 4.1. :wink:
+*/
+
+const mixedArr = [6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10];
+
+function avg (arr) {
+
+if (!arr.length) return null; 
+  
+let averageValue = (sum(arr) / arr.length )
+  
+  return numbers (averageValue);
+
+
+}
+
+
+
+
+
 
 // Iteration #5: Unique arrays
+
+/*Take the following array, remove the duplicates, and return a new array. 
+You are more than likely going to want to check out the [`indexOf`]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) Array method.
+Do this in the form of a function `uniquifyArray` that receives an array of words as a argument.
+You can use the following array to test your solution:*/
+
+
 const wordsUnique = [
   'crab',
   'poison',
@@ -52,20 +200,61 @@ const wordsUnique = [
   'bring'
 ];
 
-function uniquifyArray() {}
+function uniquifyArray() {
+
+  let newArray = [];
+  if (!array.length) return null;
+  for (let i=0; i<array.length; i++) {
+  let word=array[i];
+if(newArray.indexOf(word)<0) {
+
+  newArray.push(array[i]);
+} 
+}
+return newArray
+}
+console.log(uniquifyArray(wordsUnique));
+
+
+
 
 
 
 // Iteration #6: Find elements
+
+
+/*Let's create a simple array search.
+
+Declare a function named `doesWordExist` that will take in an array of words as one argument, and a word to search
+for as the other. Return `true` if it exists, otherwise, return `false`. **Don't** use `indexOf` for this one.*/
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
 
-function doesWordExist() {}
+function doesWordExist(arrayOfWords, theOtherWord) {
+
+  let exist = false;
+
+  if (!arrayOfWords.length) return null;
+  for (let i=0; i < arrayOfWords.length; i++ ) {
+      if(arrayOfWords[i] === theOtherWord) {
+        exist = true;
+      }
+  }
+
+  return exist;
+
+}
+
+console.log(doesWordExist(wordsFind))
 
 
 
 // Iteration #7: Count repetition
+
+/*Declare a function named `howManyTimes` that will take in an array of words as the first 
+argument, and a word to search for as the second argument. The function will return the 
+number of times that word appears in the array.*/
+
 const wordsCount = [
-  'machine',
   'matter',
   'subset',
   'trouble',
@@ -75,14 +264,52 @@ const wordsCount = [
   'matter',
   'truth',
   'disobedience',
-  'matter'
+  'matter',
+  'machine'
 ];
 
-function howManyTimes() {}
+function howManyTimes(arrayOfWords, wordToSearch ) {
+
+  let count = 0;
+  for (let i=0; i < arrayOfWords; i++ ){
+
+  if (arrayOfWords[i] === wordToSearch) {
+    count ++;
+  } 
+
+}
+  return count;
+
+}
+
+console.log (howManyTimes(wordsCount))
+
+
 
 
 
 // Iteration #8: Bonus
+
+/* 
+What is the greatest product of four adjacent numbers? We consider adjacent any four 
+numbers that are next to each other horizontally or vertically.
+
+For example, if we have a 5x5 Matrix like:
+
+```bash
+[ 1,  2, 3, 4, 5]
+[ 1, 20, 3, 4, 5]
+[ 1, 20, 3, 4, 5]
+[ 1, 20, 3, 4, 5]
+[ 1,  4, 3, 4, 5]
+```
+
+The greatest product will be the `20`x`20`x`20`x`4` = `32000`.
+
+Declare a function named `greatestProduct(matrix)` to find it in the 20×20 grid below!
+
+
+*/
 const matrix = [
   [8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8],
   [49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0],
@@ -106,25 +333,12 @@ const matrix = [
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
 
-function greatestProduct() {}
+function greatestProduct() {
 
 
 
 
-// The following is required to make unit tests work.
-/* Environment setup. Do not modify the below code. */
-if (typeof module !== 'undefined') {
-  module.exports = {
-    maxOfTwoNumbers,
-    findLongestWord,
-    sumNumbers,
-    sum,
-    averageNumbers,
-    averageWordLength,
-    avg,
-    uniquifyArray,
-    doesWordExist,
-    howManyTimes,
-    greatestProduct
-  };
+
 }
+
+
